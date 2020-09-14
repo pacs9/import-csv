@@ -1,0 +1,162 @@
+﻿@model IEnumerable<import_csv.Models.Motorista>
+
+@{
+    ViewBag.Title = "Motoristas";
+}
+
+<h2>Motoristas</h2>
+
+<p>
+    <a href="@Url.Action("Create", "Motoristas")" class="btn btn-primary btn-lg">Adicionar</a>
+</p>
+<table class="table" id="table-Filter">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>Email</th>
+            <th>CPFCNPJ</th>
+            <th>CEP</th>
+            <th>Rua</th>
+            <th>Numero</th>
+            <th>Cidade</th>
+            <th>Estado</th>
+            <th>Id</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>Email</th>
+            <th>CPFCNPJ</th>
+            <th>CEP</th>
+            <th>Rua</th>
+            <th>Numero</th>
+            <th>Cidade</th>
+            <th>Estado</th>
+            <th>Id</th>
+            <th>Ações</th>
+        </tr>
+    </tbody>
+    @*<thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Nome)</th>
+                <th>@Html.DisplayNameFor(model => model.Telefone)</th>
+                <th>@Html.DisplayNameFor(model => model.Email)</th>
+                <th>@Html.DisplayNameFor(model => model.CPFCNPJ)</th>
+                <th>@Html.DisplayNameFor(model => model.CEP)</th>
+                <th>@Html.DisplayNameFor(model => model.Rua)</th>
+                <th>@Html.DisplayNameFor(model => model.Numero)</th>
+                <th>@Html.DisplayNameFor(model => model.Cidade)</th>
+                <th>@Html.DisplayNameFor(model => model.Estado)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Telefone)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CPFCNPJ)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CEP)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Rua)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Numero)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Cidade)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Estado)</td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Detalhes", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Deletar", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        </tbody>*@
+</table>
+
+@*<link href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.15/css/dataTables.semanticui.min.css" rel="stylesheet" />*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/dataTable")
+    @*<script src="https://cdn.datatables.net/1.10.15/js/dataTables.semanticui.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.min.js"></script>*@
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            $('#table-Filter').DataTable({
+                "language": {
+                    "sEmptyTable": "Nenhum registro encontrado",
+                    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                    "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sInfoThousands": ".",
+                    "sLengthMenu": "_MENU_ resultados por página",
+                    "sLoadingRecords": "Carregando...",
+                    "sProcessing": "Processando...",
+                    "sZeroRecords": "Nenhum registro encontrado",
+                    "sSearch": "Pesquisar",
+                    "oPaginate": {
+                        "sNext": "Próximo",
+                        "sPrevious": "Anterior",
+                        "sFirst": "Primeiro",
+                        "sLast": "Último"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Ordenar colunas de forma ascendente",
+                        "sSortDescending": ": Ordenar colunas de forma descendente"
+                    },
+                    "select": {
+                        "rows": {
+                            "_": "Selecionado %d linhas",
+                            "0": "Nenhuma linha selecionada",
+                            "1": "Selecionado 1 linha"
+                        }
+                    },
+                    "buttons": {
+                        "copy": "Copiar para a área de transferência",
+                        "copyTitle": "Cópia bem sucedida",
+                        "copySuccess": {
+                            "1": "Uma linha copiada com sucesso",
+                            "_": "%d linhas copiadas com sucesso"
+                        }
+                    }
+                },
+                "processing": true,
+                "serverSide": "true",
+                "order": [0, "asc"],
+                "ajax": {
+                    "url": "/Motoristas/GetMotoristas",
+                    "type": "POST",
+                    "dataType": "json"
+                },
+                "columns": [                    
+                    { "data": "Nome", "name": "Nome", "autowidth": true },
+                    { "data": "Telefone", "name": "Telefone", "autowidth": true },
+                    { "data": "Email", "name": "Email", "autowidth": true },
+                    { "data": "CPFCNPJ", "name": "CPFCNPJ", "autowidth": true },
+                    { "data": "CEP", "name": "CEP", "autowidth": true },
+                    { "data": "Rua", "name": "Rua", "autowidth": true },
+                    { "data": "Numero", "name": "Numero", "autowidth": true },
+                    { "data": "Cidade", "name": "Cidade", "autowidth": true },
+                    { "data": "Estado", "name": "Estado", "autowidth": true },                    
+                    { "data": "Id", "name": "Id", "visible": false, "searchable": false, "sortable": false },
+                    {
+                        "name": "Ações",
+                        "data": "Id",
+                        "searchable": false,
+                        "sortable": false,
+                        "render": function (data, type, full, meta) {
+                            return '<a href="@Url.Action("Edit","Motoristas")?id=' + data + '" class="editUser">Editar</a> | <a href="@Url.Action("Details", "Motoristas")?id=' + data + '" class="editUser">Detalhes</a> | <a href="@Url.Action("Delete", "Motoristas")?id=' + data + '" class="editUser">Deletar</a>';
+                        }
+                    }
+                ]                
+            });
+        });
+</script>
+}
